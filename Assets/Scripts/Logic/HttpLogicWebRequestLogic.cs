@@ -6,6 +6,7 @@ public class HttpLogicWebRequestLogic : SingletonMonoBehaviour<HttpLogicWebReque
 	string url;
 	float downLoadProgress;
 	bool isDownStart;
+	UnityWebRequest www;
 
 	public void SetUrl(string targetUrl){
 		isDownStart = false;
@@ -14,31 +15,25 @@ public class HttpLogicWebRequestLogic : SingletonMonoBehaviour<HttpLogicWebReque
 
 	public IEnumerator StartDownLoad(){
 		isDownStart = true;
-		var request = UnityWebRequest.Get (this.url);
-		yield return request.Send();
-		Debug.Log(request.responseCode.ToString() + ":" + request.downloadHandler.text);
-
-		/*using(WWW www = new WWW(url)){
-
-			while (!www.isDone) {
-				downLoadProgress = www.progress;
-				yield return www;
+		using (www = UnityWebRequest.Get (this.url)) {
+			yield return www.Send ();
+			isDownStart = false;
+			if(www.isError) {
+				Debug.Log(www.error);
 			}
-		
-			if (!string.IsNullOrEmpty (www.error)) {
-				downLoadProgress = -1;
-				Debug.Log (www.error);
-			} 
 			else {
-				downLoadProgress = 1;
-				Debug.Log (www.text);
+				Debug.Log (www.responseCode.ToString () + ":" + www.downloadHandler.text);
 			}
-
-		}*/
+		}
 	}
 
 	public float currentProggress(){
-		return downLoadProgress;
+		if (www == null) {
+			return -1;
+		} else {
+			return www.downloadProgress;
+		}
+
 	}
 
 	public bool isNowDownLoading(){
