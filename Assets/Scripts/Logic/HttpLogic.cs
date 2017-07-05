@@ -19,6 +19,7 @@ public class HttpLogic : SingletonMonoBehaviour<HttpLogic> {
 				downLoadProgress = www.progress;
 				yield return www;
 			}
+			isDownStart = false;
 		
 			if (!string.IsNullOrEmpty (www.error)) {
 				downLoadProgress = -1;
