@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneChageTestController : MonoBehaviour {
-	public GameObject LoadingPanel;
 	// Use this for initialization
 	void Start () {
 		
@@ -16,7 +15,7 @@ public class SceneChageTestController : MonoBehaviour {
 
 	private IEnumerator LoadScene(string sceneName)
 	{		
-		LoadingPanel.SetActive (true);
+		Common.Instance.LoadingPanel.SetActive (true);
 		float start = Time.realtimeSinceStartup;
 
 		AsyncOperation loadReq = SceneManager.LoadSceneAsync (sceneName, LoadSceneMode.Single);
@@ -25,7 +24,7 @@ public class SceneChageTestController : MonoBehaviour {
 			yield return null;
 		}
 		loadReq.allowSceneActivation = true;
-		LoadingPanel.SetActive (false);
+	
 
 	}
 	

@@ -4,8 +4,9 @@ using System.Collections;
 public class MvcController : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-	
+	IEnumerator Start () {
+		yield return new WaitForSeconds (2);
+		Common.Instance.LoadingPanel.SetActive (false);
 	}
 	
 	// Update is called once per frame
