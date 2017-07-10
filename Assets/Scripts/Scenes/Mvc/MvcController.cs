@@ -3,10 +3,11 @@ using System.Collections;
 
 public class MvcController : MonoBehaviour {
 
-	// Use this for initialization
 	IEnumerator Start () {
+		//ローディング中の表示を見せるためにスリープ（テスト用）
 		yield return new WaitForSeconds (2);
-		Common.Instance.LoadingPanel.SetActive (false);
+		//ローディングアニメーションの解除
+		Common.Instance.EndLoading();
 	}
 	
 	// Update is called once per frame

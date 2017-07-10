@@ -13,9 +13,11 @@ public class SceneChageTestController : MonoBehaviour {
 		StartCoroutine(LoadScene("MVC"));
 	}
 
+	//シーン遷移メソッド
 	private IEnumerator LoadScene(string sceneName)
 	{		
-		Common.Instance.LoadingPanel.SetActive (true);
+		//ローディング・マスクの表示
+		Common.Instance.StartLoading();
 		float start = Time.realtimeSinceStartup;
 
 		AsyncOperation loadReq = SceneManager.LoadSceneAsync (sceneName, LoadSceneMode.Single);
@@ -23,9 +25,9 @@ public class SceneChageTestController : MonoBehaviour {
 		while (Time.realtimeSinceStartup - start < 1) {
 			yield return null;
 		}
-		loadReq.allowSceneActivation = true;
-	
 
+
+		loadReq.allowSceneActivation = true;
 	}
 	
 	// Update is called once per frame
