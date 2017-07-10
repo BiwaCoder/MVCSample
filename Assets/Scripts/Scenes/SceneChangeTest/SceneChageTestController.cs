@@ -19,14 +19,14 @@ public class SceneChageTestController : MonoBehaviour {
 		//ローディング・マスクの表示
 		Common.Instance.StartLoading();
 		float start = Time.realtimeSinceStartup;
-
 		AsyncOperation loadReq = SceneManager.LoadSceneAsync (sceneName, LoadSceneMode.Single);
+
+		//TODO 遷移前アニメーション＋ シーンロードの進捗チェック
 		loadReq.allowSceneActivation = false;
 		while (Time.realtimeSinceStartup - start < 1) {
 			yield return null;
 		}
-
-
+		//TODO ロードのアニメーション終わったら遷移
 		loadReq.allowSceneActivation = true;
 	}
 	
